@@ -1,52 +1,46 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+    <!-- 自定义导航栏 -->
+    <navbar></navbar>
+    <tab :list="tabList"></tab>
+<!--    <view v-for="item in 100">
+      {{item}} 内容那个
+    </view> -->
 	</view>
 </template>
 
 <script>
+  // uni-app 中 easyCom 引入组件 不需要写导入部分 局部引入
+  // import navbar from '@/components/navbar/navbar.vue'
 	export default {
+    // components: {
+    //   navbar
+    // },
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello',
+        tabList: []
 			}
 		},
 		onLoad() {
-
+      // 页面一进入就调取这个方法
+      this.getLabel();
 		},
 		methods: {
-
+      getLabel() {
+        // 获取云函数的方法
+        // name 是云函数的名称
+        uniCloud.callFunction({
+          name: 'get_label'
+        }).then((res) => {
+          const { result } = res
+          this.tabList = result.data
+        })
+      }
 		}
 	}
 </script>
 
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
+<style lang="scss">
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
 </style>
