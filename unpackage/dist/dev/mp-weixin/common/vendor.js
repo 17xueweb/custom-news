@@ -10457,6 +10457,115 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
+/***/ 62:
+/*!*******************************************************************************************!*\
+  !*** /Users/ruanlucheng/learn/web/study-web/case/uni-app/custom-news/common/api/index.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 批量导出文件 ( 自动导出文件 )
+
+var requireApi = __webpack_require__(65);
+
+
+var _module = {};
+requireApi.keys().forEach(function (key, index) {
+  if (key === './index.js') return;
+  Object.assign(_module, requireApi(key));
+});var _default =
+
+_module;exports.default = _default;
+
+/***/ }),
+
+/***/ 63:
+/*!******************************************************************************************!*\
+  !*** /Users/ruanlucheng/learn/web/study-web/case/uni-app/custom-news/common/api/list.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.get_label = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../http.js */ 64));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var get_label = function get_label(data) {
+  return (0, _http.default)({
+    url: 'get_label',
+    data: data });
+
+};exports.get_label = get_label;
+
+/***/ }),
+
+/***/ 64:
+/*!**************************************************************************************!*\
+  !*** /Users/ruanlucheng/learn/web/study-web/case/uni-app/custom-news/common/http.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = $http;function $http(options) {var
+
+  url =
+
+  options.url,data = options.data;
+  return new Promise(function (reslove, reject) {
+    uniCloud.callFunction({
+      name: url,
+      data: data }).
+    then(function (res) {
+      if (res.result.code === 200) {
+        // .then
+        reslove(res.result);
+      } else {
+        // catch
+        reject(res.result);
+      }
+    }).catch(function (err) {
+      reject(err);
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 6)["default"]))
+
+/***/ }),
+
+/***/ 65:
+/*!*********************************************************************************************************!*\
+  !*** /Users/ruanlucheng/learn/web/study-web/case/uni-app/custom-news/common/api sync nonrecursive .js$ ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./index.js": 62,
+	"./list.js": 63
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 65;
+
+/***/ }),
+
 /***/ 7:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!

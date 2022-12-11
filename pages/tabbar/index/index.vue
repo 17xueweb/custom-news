@@ -1,11 +1,15 @@
 <template>
-	<view class="content">
+	<view class="home">
     <!-- 自定义导航栏 -->
     <navbar></navbar>
-    <tab :list="tabList"></tab>
-<!--    <view v-for="item in 100">
-      {{item}} 内容那个
-    </view> -->
+    <tab :list="tabList" @tab="tab"></tab>
+    
+    <!-- 滚动内容组件 -->
+    <list-scroll>
+      <!-- 卡片组件 -->
+      <list-card v-for="item in 5"></list-card>
+    </list-scroll>
+  
 	</view>
 </template>
 
@@ -27,14 +31,15 @@
       this.getLabel();
 		},
 		methods: {
+      tab(data, index) {
+        
+      },
       getLabel() {
-        // 获取云函数的方法
-        // name 是云函数的名称
-        uniCloud.callFunction({
+        this.$api.get_label({
           name: 'get_label'
         }).then((res) => {
-          const { result } = res
-          this.tabList = result.data
+            const { data } = res
+            this.tabList = data
         })
       }
 		}
@@ -42,5 +47,16 @@
 </script>
 
 <style lang="scss">
+page {
+  height: 100%;
+  display: flex;
+  
+}
+.home {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid  red;
 
+}
 </style>
