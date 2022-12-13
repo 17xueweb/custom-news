@@ -24,12 +24,22 @@
         default() {
           return []
         }
+      },
+      tabIndex: {
+        type: Number,
+        default: 0
       }
     },
     name:"tab",
     data() {
       return {
         activeIndex: 0
+      }
+    },
+    // 可以监听data props中的变化
+    watch: {
+      tabIndex(newVal) {
+        this.activeIndex = newVal
       }
     },
     methods: {

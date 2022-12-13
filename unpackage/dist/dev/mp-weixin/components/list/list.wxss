@@ -24,19 +24,14 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-page {
+.home-swiper {
   height: 100%;
-  display: flex;
 }
-.home {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  border: 1px solid  red;
+.home-swiper .swiper-item {
+  height: 100%;
   overflow: hidden;
 }
-.home .home-list {
-  flex: 1;
-  box-sizing: border-box;
+.home-swiper .swiper-item .list-scroll {
+  height: 100%;
 }
 

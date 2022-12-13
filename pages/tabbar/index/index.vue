@@ -2,13 +2,13 @@
 	<view class="home">
     <!-- 自定义导航栏 -->
     <navbar></navbar>
-    <tab :list="tabList" @tab="tab"></tab>
+    <tab :list="tabList" @tab="tab" :tabIndex="tabIndex"></tab>
+    <view class="home-list">
+      <!-- 轮播图组件：包含滚动内容组件和卡片组件 -->
+      <list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
+    </view>
     
-    <!-- 滚动内容组件 -->
-    <list-scroll>
-      <!-- 卡片组件 -->
-      <list-card v-for="item in 5"></list-card>
-    </list-scroll>
+ 
   
 	</view>
 </template>
@@ -23,7 +23,9 @@
 		data() {
 			return {
 				title: 'Hello',
-        tabList: []
+        tabList: [],
+        tabIndex: 0,
+        activeIndex: 0
 			}
 		},
 		onLoad() {
@@ -31,8 +33,9 @@
       this.getLabel();
 		},
 		methods: {
-      tab(data, index) {
-        
+      tab({data,  index}) {
+        console.log(index);
+        this.activeIndex = index
       },
       getLabel() {
         this.$api.get_label({
@@ -41,6 +44,9 @@
             const { data } = res
             this.tabList = data
         })
+      },
+      change(current) {
+        this.tabIndex = current
       }
 		}
 	}
@@ -57,6 +63,11 @@ page {
   flex-direction: column;
   flex: 1;
   border: 1px solid  red;
+  overflow: hidden;
+  .home-list {
+    flex: 1;
+    box-sizing: border-box;
+  }
 
 }
 </style>
