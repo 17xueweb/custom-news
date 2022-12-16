@@ -2789,13 +2789,20 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.get_label = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../http.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.get_list = exports.get_label = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../http.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 var get_label = function get_label(data) {
   return (0, _http.default)({
     url: 'get_label',
     data: data });
 
 };exports.get_label = get_label;
+
+var get_list = function get_list(data) {
+  return (0, _http.default)({
+    url: 'get_list',
+    data: data });
+
+};exports.get_list = get_list;
 
 /***/ }),
 
@@ -9389,18 +9396,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 7:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 8);
-
-/***/ }),
-
-/***/ 73:
+/***/ 68:
 /*!***************************************************************************************************************************!*\
   !*** /Users/ruanlucheng/learn/web/study-web/case/uni-app/custom-news/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \***************************************************************************************************************************/
@@ -10574,6 +10570,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     "font_class": "cart",
     "unicode": "e631",
     "unicode_decimal": 58929 }] };exports.default = _default;
+
+/***/ }),
+
+/***/ 7:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 8);
 
 /***/ }),
 
