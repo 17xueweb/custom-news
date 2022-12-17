@@ -34,7 +34,6 @@
 		},
 		methods: {
       tab({data,  index}) {
-        console.log(index);
         this.activeIndex = index
       },
       getLabel() {
@@ -42,6 +41,9 @@
           name: 'get_label'
         }).then((res) => {
             const { data } = res
+            data.unshift({
+              name: '全部'
+            })
             this.tabList = data
         })
       },

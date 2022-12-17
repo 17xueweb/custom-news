@@ -46,16 +46,18 @@
     methods: {
       change(e) {
         const { current } = e.detail
-        this.getList(current)
         this.$emit('change', current)
-        
+        // 没有数据时候 才去调用请求 解决 swiper往回滑动重复调用接口问题
+        if(!this.listCatchData[current] || this.listCatchData[current].length === 0) {
+          this.getList(current)
+        }
       },
       getList(current) {
         this.$api.get_list({
           name: this.tab[current].name
           }).then(res => {
           const { data } = res
-          console.log('请求数据：', data);
+          console.log(res);
           // this.list = data
           // this.listCatchData[current] = data
           // $set 帮我们通知页面 我们数组或者对象发生了变化 去刷新下
