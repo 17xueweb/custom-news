@@ -9,6 +9,7 @@
       <view class="listcard-content">
         <view class="listcard-content-title">
           <text>{{item.title}}</text>
+          <likes :item="item"></likes>
         </view>
         <view class="listcard-content-des">
           <view class="listcard-content-des-label">
@@ -28,6 +29,7 @@
       <view class="listcard-content">
         <view class="listcard-content-title">
           <text>{{item.title}}</text>
+          <likes :item="item"></likes>
         </view>
         <view class="listcard-image">
           <!-- 只展示3张 -->
@@ -56,6 +58,7 @@
       <view class="listcard-content">
         <view class="listcard-content-title">
           <text>{{item.title}}</text>
+          <likes :item="item"></likes>
         </view>
         <view class="listcard-content-des">
           <view class="listcard-content-des-label">
@@ -117,6 +120,8 @@
     padding-left: 10px;
     width: 100%;
     .listcard-content-title {
+      position: relative;
+      padding-right: 30px;
       font-size: 14px;
       color: #333;
       font-weight: 400;
