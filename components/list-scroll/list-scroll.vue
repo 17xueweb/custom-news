@@ -1,7 +1,8 @@
 <template>
   <!-- 滚动组件 -->
+  <!-- 滚动到底部/右边，会触发 scrolltolower 事件 -->
   <view class="scroll">
-    <scroll-view scroll-y class="list-scroll">
+    <scroll-view scroll-y class="list-scroll" @scrolltolower="loadmore">
       <view>
         <slot></slot>
       </view>
@@ -15,7 +16,12 @@
     data() {
       return {
 
-      };
+      }
+    },
+    methods: {
+      loadmore() {
+        this.$emit('loadmore')
+      }
     }
   }
 </script>

@@ -3,7 +3,11 @@
 const db = uniCloud.database()
 exports.main = async (event, context) => {
   // 接收分类,通过分类去筛选数据 event可以接收参数
-  const { name } = event
+  const { 
+    name,
+    page = 1,
+    pageSize = 10
+     } = event
   
   // 处理全部
   let matchObj = {}
@@ -18,9 +22,19 @@ exports.main = async (event, context) => {
   // match 根据条件过滤文档，并且把符合条件的文档传递给下一个流水线阶段,筛选classify 并且把name值传进来
   // project 指定某些字段返回到数据中或者某些字段不去返回到数据中 跟下面的 field 使用方法很接近，不要content内容
   // end 标志聚合操作定义完成，发起实际聚合操作
-  const list = await db.collection('article').aggregate().match(matchObj).project({
-    content: false
-  }).end()
+  // skip 指定一个正整数，跳过对应数量的文档，输出剩下的文档。
+  // limit: 限制输出到下一阶段的记录数。
+  const list = await db.collection('article')
+        .aggregate()
+        .match(matchObj)
+        .project({
+          content: false
+        })
+        // 计算出我们要跳过多少数据
+        .skip(pageSize*(page-1))
+        // 控制每次返回多少数据 10条
+        .limit(pageSize)
+        .end()
   
   
 
