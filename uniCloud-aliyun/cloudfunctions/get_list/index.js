@@ -1,9 +1,12 @@
 'use strict';
 // 1. 获取数据库的引用
 const db = uniCloud.database()
+// 声明一个聚合的操作符
+const $ = db.command.aggregate
 exports.main = async (event, context) => {
   // 接收分类,通过分类去筛选数据 event可以接收参数
   const { 
+    user_id,
     name,
     page = 1,
     pageSize = 10
@@ -17,6 +20,10 @@ exports.main = async (event, context) => {
     }
   }
   
+  // 获取用户表
+  const userinfo = await db.collection('user').doc(user_id).get()
+  const article_likes_ids = userinfo.data[0].article_likes_ids
+  
   // 聚合：更精细化去处理数据 求和、分组、指定返回哪些字段
   // aggregate 获取数据库集合的聚合操作实例
   // match 根据条件过滤文档，并且把符合条件的文档传递给下一个流水线阶段,筛选classify 并且把name值传进来
@@ -24,8 +31,12 @@ exports.main = async (event, context) => {
   // end 标志聚合操作定义完成，发起实际聚合操作
   // skip 指定一个正整数，跳过对应数量的文档，输出剩下的文档。
   // limit: 限制输出到下一阶段的记录数。
+  // addFields 追加一个字段
   const list = await db.collection('article')
         .aggregate()
+        .addFields({
+          is_like: $.in(['$_id', article_likes_ids])
+        })
         .match(matchObj)
         .project({
           content: false
