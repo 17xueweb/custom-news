@@ -2548,7 +2548,7 @@ uni$1;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": [{ "path": "pages/tabbar/index/index", "style": { "navigationStyle": "custom", "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app" } }, { "path": "pages/tabbar/follow/follow", "style": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, { "path": "pages/tabbar/my/my", "style": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }], "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" }, "tabBar": { "color": "#666", "selectedColor": "#f07373", "backgroundColor": "#fff", "list": [{ "pagePath": "pages/tabbar/index/index", "iconPath": "static/home.png", "selectedIconPath": "static/home-active.png", "text": "首页" }, { "pagePath": "pages/tabbar/follow/follow", "iconPath": "static/follow.png", "selectedIconPath": "static/follow-active.png", "text": "关注" }, { "pagePath": "pages/tabbar/my/my", "iconPath": "static/my.png", "selectedIconPath": "static/my-active.png", "text": "我的" }] }, "uniIdRouter": {} };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": [{ "path": "pages/tabbar/index/index", "style": { "navigationStyle": "custom", "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app" } }, { "path": "pages/tabbar/follow/follow", "style": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, { "path": "pages/tabbar/my/my", "style": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, { "path": "pages/home-search/home-search", "style": { "navigationStyle": "custom", "navigationBarTitleText": "", "enablePullDownRefresh": false } }], "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" }, "tabBar": { "color": "#666", "selectedColor": "#f07373", "backgroundColor": "#fff", "list": [{ "pagePath": "pages/tabbar/index/index", "iconPath": "static/home.png", "selectedIconPath": "static/home-active.png", "text": "首页" }, { "pagePath": "pages/tabbar/follow/follow", "iconPath": "static/follow.png", "selectedIconPath": "static/follow-active.png", "text": "关注" }, { "pagePath": "pages/tabbar/my/my", "iconPath": "static/my.png", "selectedIconPath": "static/my-active.png", "text": "我的" }] }, "uniIdRouter": {} };exports.default = _default;
 
 /***/ }),
 
@@ -2789,7 +2789,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.get_list = exports.get_label = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../http.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.update_like = exports.get_list = exports.get_label = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../http.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 var get_label = function get_label(data) {
   return (0, _http.default)({
     url: 'get_label',
@@ -2804,6 +2804,13 @@ var get_list = function get_list(data) {
 
 };exports.get_list = get_list;
 
+var update_like = function update_like(data) {
+  return (0, _http.default)({
+    url: 'update_like',
+    data: data });
+
+};exports.update_like = update_like;
+
 /***/ }),
 
 /***/ 21:
@@ -2814,15 +2821,19 @@ var get_list = function get_list(data) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = $http;function $http(options) {var
+/* WEBPACK VAR INJECTION */(function(uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = $http;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function $http(options) {var
 
   url =
 
   options.url,data = options.data;
+  var dataObj = _objectSpread({
+    user_id: '63909d2df5cf3a959a5f229b' },
+  data);
+
   return new Promise(function (reslove, reject) {
     uniCloud.callFunction({
       name: url,
-      data: data }).
+      data: dataObj }).
     then(function (res) {
       if (res.result.code === 200) {
         // .then
@@ -9396,7 +9407,18 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 68:
+/***/ 7:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 8);
+
+/***/ }),
+
+/***/ 74:
 /*!***************************************************************************************************************************!*\
   !*** /Users/ruanlucheng/learn/web/study-web/case/uni-app/custom-news/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \***************************************************************************************************************************/
@@ -10570,17 +10592,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     "font_class": "cart",
     "unicode": "e631",
     "unicode_decimal": 58929 }] };exports.default = _default;
-
-/***/ }),
-
-/***/ 7:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 8);
 
 /***/ }),
 

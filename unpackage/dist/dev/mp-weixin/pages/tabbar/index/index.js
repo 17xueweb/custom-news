@@ -98,13 +98,13 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 42))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 48))
     },
     tab: function() {
-      return __webpack_require__.e(/*! import() | components/tab/tab */ "components/tab/tab").then(__webpack_require__.bind(null, /*! @/components/tab/tab.vue */ 49))
+      return __webpack_require__.e(/*! import() | components/tab/tab */ "components/tab/tab").then(__webpack_require__.bind(null, /*! @/components/tab/tab.vue */ 55))
     },
     list: function() {
-      return __webpack_require__.e(/*! import() | components/list/list */ "components/list/list").then(__webpack_require__.bind(null, /*! @/components/list/list.vue */ 56))
+      return __webpack_require__.e(/*! import() | components/list/list */ "components/list/list").then(__webpack_require__.bind(null, /*! @/components/list/list.vue */ 62))
     }
   }
 } catch (e) {
@@ -197,7 +197,6 @@ var _default = {
   },
   methods: {
     tab: function tab(_ref) {var data = _ref.data,index = _ref.index;
-      console.log(index);
       this.activeIndex = index;
     },
     getLabel: function getLabel() {var _this = this;
@@ -205,11 +204,15 @@ var _default = {
         name: 'get_label' }).
       then(function (res) {var
         data = res.data;
+        data.unshift({
+          name: '全部' });
+
         _this.tabList = data;
       });
     },
     change: function change(current) {
       this.tabIndex = current;
+      this.activeIndex = current;
     } } };exports.default = _default;
 
 /***/ }),
