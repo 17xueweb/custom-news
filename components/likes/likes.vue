@@ -20,17 +20,32 @@
         like: false
       };
     },
+    watch: {
+      item(newVal) {
+        this.like = this.item.is_like
+      }
+    },
+    created() {
+      this.like = this.item.is_like
+    },
     methods: {
       likeTap() {
         this.like = !this.like
         this.setUpdateLikes()
       },
       setUpdateLikes() {
+        uni.showLoading()
         this.$api.update_like({
           user_id: '63909d2df5cf3a959a5f229b',
           article_id: this.item._id
         }).then(res => {
-          
+          uni.hideLoading()
+          uni.showToast({
+            title: this.like ? '收藏成功' : '取消收藏',
+            icon: 'none'
+          })
+        }).catch(() => {
+          uni.hideLoading()
         })
       }
     }
