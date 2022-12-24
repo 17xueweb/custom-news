@@ -37,6 +37,10 @@
       isSearch: {
         type: Boolean,
         default: false
+      },
+      value: {
+        type: [String, Number],
+        default: ''
       }
     },
     data() {
@@ -81,6 +85,11 @@
         this.$emit('input', value)
         
       }
+    },
+    watch: {
+      value(newValue) {
+        this.val = newValue
+      }
     }
   }
 </script>
@@ -119,6 +128,7 @@
             margin-right: 10px;
           }
           .navbar-search_text {
+            width: 100%;
             font-size: 12px;
             color: #999;
           }

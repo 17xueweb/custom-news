@@ -1,6 +1,6 @@
 <template>
   <!-- 卡片组件 -->
-  <view>
+  <view @click="open">
     <!-- 基础卡片 -->
    <view class="listcard" v-if="item.mode === 'base'">
       <view class="listcard-image">
@@ -90,6 +90,13 @@
       return {
         
       };
+    },
+    methods: {
+      open() {
+        // 注意这里发送的事件叫 click
+        this.$emit('click', this.item)
+        console.log('打开详情页面');
+      }
     }
   }
 </script>
