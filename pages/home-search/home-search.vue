@@ -7,10 +7,10 @@
         <view class="label-header">
           <!-- 搜索历史 -->
           <text class="label-title">搜索历史</text>
-          <text class="label-clear">清空</text>
+          <text class="label-clear" @click="clear">清空</text>
         </view>
         <view v-if="historyLists.length > 0" class="label-content">
-          <view class="label-content-item" v-for="item in historyLists" @click="openHistory(item)">
+          <view class="label-content-item" v-for="(item, index) in historyLists" :key="index" @click="openHistory(item)">
             {{item.name}}
           </view>
         </view>
@@ -96,6 +96,12 @@
       openHistory(item) {
         this.value = item.name
         this.getSearch(this.value)
+      },
+      clear() {
+        this.$store.dispatch('clear_history')
+        uni.showToast({
+          title: '清空完成'
+        })
       }
     }
   }
@@ -112,7 +118,6 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    border: 1px solid red;
 
     .label-box {
       background-color: #fff;
