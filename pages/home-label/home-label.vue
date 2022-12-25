@@ -46,7 +46,13 @@
     },
     methods: {
       editLabel() {
-        this.is_edit = !this.is_edit
+        // true正在编辑
+        if(this.is_edit) {
+          this.is_edit = false
+          this.setUpdateLabel(this.labelList)
+        }else {
+          this.is_edit = true
+        }
       },
       getLabel() {
         this.$api.get_label({
@@ -56,6 +62,23 @@
           const { data } = res
           this.labelList = data.filter(item => item.current)
           this.list = data.filter(item => !item.current)
+        })
+      },
+      setUpdateLabel(label) {
+        let newArrIds = []
+        label.forEach(item => {
+          newArrIds.push(item._id)
+        })
+        uni.showLoading()
+        this.$api.update_label({
+          label: newArrIds
+        }).then((res) => {
+          uni.hideLoading()
+          uni.showToast({
+            title: '更新成功',
+            icon: 'none'
+          })
+          console.log(res);
         })
       },
       del(index) {
