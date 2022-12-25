@@ -1,19 +1,19 @@
 <template>
   <view class="detail">
     <view class="detail-title">
-      我是一个前端开发者，我到底要不要学nodeJS
+      {{formData.title}}
       <view class="detail-header">
         <view class="detail-header-logo">
-          <image src="../../static/logo.png" mode="aspectFill"></image>
+          <image :src="formData.author.avatar" mode="aspectFill"></image>
         </view>
         <view class="detail-header-content">
           <view class="detail-header-content-title">
-            meHaotian
+            {{formData.author.author_name}}
           </view>
           <view class="detail-header-content-info">
-            <text>2022-12-26</text>
-            <text>1234 浏览</text>
-            <text>2345 赞</text>
+            <text>{{formData.create_time}}</text>
+            <text>{{formData.browse_count}} 浏览</text>
+            <text>{{formData.thumbs_up_count}} 赞</text>
           </view>
         </view>
       </view>
@@ -45,8 +45,12 @@
   export default {
     data() {
       return {
-        
+        formData: {}
       }
+    },
+    onLoad(query) {
+      // query 是通过navigateTo 传过来的
+      this.formData = JSON.parse(query.params)
     },
     methods: {
       

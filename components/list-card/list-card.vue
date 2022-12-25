@@ -93,11 +93,21 @@
     },
     methods: {
       open() {
+        console.log(this.item);
+        const item = this.item
         // 注意这里发送的事件叫 click
         this.$emit('click', this.item)
-        console.log('打开详情页面');
+        const params = {
+          _id: item._id,
+          author: item.author,
+          title: item.title,
+          create_time: item.create_time,
+          thumbs_up_count: item.thumbs_up_count,
+          browse_count: item.browse_count
+        }
+        // 这里传参注意长度,在H5中可能会被截断
         uni.navigateTo({
-          url: "/pages/home-detail/home-detail"
+          url: "/pages/home-detail/home-detail?params=" + JSON.stringify(params)
         })
       }
     }
