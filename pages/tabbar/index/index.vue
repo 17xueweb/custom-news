@@ -7,9 +7,6 @@
       <!-- 轮播图组件：包含滚动内容组件和卡片组件 -->
       <list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
     </view>
-    
- 
-  
 	</view>
 </template>
 
@@ -28,8 +25,14 @@
         activeIndex: 0
 			}
 		},
+    // 页面一进入就调取这个方法
 		onLoad() {
-      // 页面一进入就调取这个方法
+      uni.$on('labelChange', (res) => {
+        this.tabList = []
+        this.tabIndex = 0
+        this.activeIndex = 0
+        this.getLabel();
+      })
       this.getLabel();
 		},
 		methods: {
