@@ -19,7 +19,9 @@
       </view>
     </view>
     <view class="detail-content">
-      详情数据
+      <view class="detail-html">
+        {{formData.content}}
+      </view>
     </view>
     <view class="detail-bottom">
       <view class="detail-bottom-input">
@@ -51,9 +53,19 @@
     onLoad(query) {
       // query 是通过navigateTo 传过来的
       this.formData = JSON.parse(query.params)
+      this.getDetail()
     },
     methods: {
-      
+      // 获取详情信息
+      getDetail() {
+        this.$api.get_detail({
+          article_id: this.formData._id
+        }).then((res) => {
+          const { data } = res
+          this.formData = data
+          console.log(res);
+        })
+      }
     }
   }
 </script>
@@ -105,8 +117,11 @@
   }
 }
 .detail-content {
-  height: 1000px;
-  border: 1px solid red;
+  margin-top: 20px;
+  min-height: 500px;
+  .detail-html {
+    padding: 0 15px;
+  }
 }
 .detail-bottom {
   position: fixed;
