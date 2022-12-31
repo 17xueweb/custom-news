@@ -20,11 +20,11 @@
     </view>
     <view class="detail-content">
       <view class="detail-html">
-        {{formData.content}}
+        <u-parse :content="formData.content" :noData="noData"></u-parse>
       </view>
     </view>
     <view class="detail-bottom">
-      <view class="detail-bottom-input">
+      <view class="detail-bottom-input" @click="openComment">
         <text>谈谈你的看法</text>
         <uni-icons type="compose" size="16" color="#f07373"></uni-icons>
       </view>
@@ -40,20 +40,46 @@
         </view>
       </view>
     </view>
+    <uni-popup ref="popup" type="bottom" :maskClick="false">
+      <view class="popup-wrap">
+        <view class="popup-header">
+          <text class="popup-header-item" @click="close">取消</text>
+          <text class="popup-header-item" @click="submit">发布</text>
+        </view>
+        <view class="popup-content">
+          <textarea class="popup-textarea" v-model="commentsValue" maxlength="200" fixed placeholder="请输入评论内容"></textarea>
+          <view class="popup-count">
+            {{commentsValue.length}}/200
+          </view>
+        </view>
+      </view>
+    </uni-popup>
   </view>
 </template>
 
 <script>
+  import uParse from '@/components/gaoyia-parse/parse.vue'
   export default {
+    components: {
+      uParse
+    },
     data() {
       return {
-        formData: {}
+        formData: {},
+        noData: '<p style="text-align:center;color:#666;">详情加载中...</p>',
+        // 输入框的值
+        commentsValue: ''
       }
     },
     onLoad(query) {
       // query 是通过navigateTo 传过来的
       this.formData = JSON.parse(query.params)
-      this.getDetail()
+      // this.getDetail()
+    },
+    
+    onReady() {
+      // 所有页面渲染完毕之后,才能使用popup
+      
     },
     methods: {
       // 获取详情信息
@@ -65,6 +91,18 @@
           this.formData = data
           console.log(res);
         })
+      },
+      openComment() {
+        // 打开评论发布窗口
+        this.$refs.popup.open()
+      },
+      // 关闭弹窗
+      close() {
+         this.$refs.popup.close()
+      },
+      // 发布
+      submit() {
+        this.$refs.popup.close()
       }
     }
   }
@@ -162,4 +200,35 @@
     }
   }
 }
+
+  .popup-wrap {
+    background-color: #fff;
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #666;
+      border-bottom: 1px solid #f5f5f5;
+      .popup-header-item {
+        height: 50px;
+        line-height: 50px;
+        padding: 0 15px;
+      }
+    }
+    .popup-content {
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      .popup-textarea {
+        width: 100%;
+        height: 200px;
+      }
+      .popup-count {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 12px;
+        color: #999;
+      }
+    }
+  }
 </style>
