@@ -16,6 +16,7 @@
             <text>{{formData.thumbs_up_count}} 赞</text>
           </view>
         </view>
+        <button class="detail-header-button" type="default">关注</button>
       </view>
     </view>
     <view class="detail-content">
@@ -213,6 +214,13 @@
         margin-right: 10px;
       }
     }
+  }
+  .detail-header-button {
+    flex-shrink: 0;
+    height: 30px;
+    font-size: 12px;
+    background-color: $mk-base-color;
+    color: #fff;
   }
 }
 .detail-content {
