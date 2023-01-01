@@ -4,5 +4,7 @@
   "user_id": "63909d2df5cf3a959a5f229b",
   "article_id": "63909d2ae1a35c299df6f5b0",
   "comment_id": "6hirvzm6ka80",
-  "content": "回复成功"
+  "reply_id": "30rjaqe7p740",
+  "is_reply": true,
+  "content": "子回复成功"
 }
