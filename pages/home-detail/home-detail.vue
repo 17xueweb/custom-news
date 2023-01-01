@@ -26,8 +26,8 @@
           <view class="comment-title">
             最新评论
           </view>
-          <view class="comment-content">
-            <comments-box></comments-box>
+          <view class="comment-content" v-for="item in commentsList" :key="item.comment_id">
+            <comments-box :comments="item"></comments-box>
           </view>
         </view>
       </view>
@@ -77,13 +77,15 @@
         formData: {},
         noData: '<p style="text-align:center;color:#666;">详情加载中...</p>',
         // 输入框的值
-        commentsValue: ''
+        commentsValue: '',
+        commentsList: []
       }
     },
     onLoad(query) {
       // query 是通过navigateTo 传过来的
       this.formData = JSON.parse(query.params)
       // this.getDetail()
+      this.getComments()
     },
     
     onReady() {
@@ -99,6 +101,16 @@
           const { data } = res
           this.formData = data
           console.log(res);
+        })
+      },
+      // 请求评论内容
+      getComments() {
+        this.$api.get_comments({
+          article_id: this.formData._id
+        }).then(res => {
+          console.log(res);
+          const { data } = res
+          this.commentsList = data
         })
       },
       openComment() {
