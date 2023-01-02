@@ -16,7 +16,7 @@
             <text>{{formData.thumbs_up_count}} 赞</text>
           </view>
         </view>
-        <button class="detail-header-button" type="default">关注</button>
+        <button class="detail-header-button" type="default" @click="follow(formData.author.id)">{{formData.is_author_like?'取消关注': '关注'}}</button>
       </view>
     </view>
     <view class="detail-content">
@@ -42,8 +42,8 @@
         <view class="detail-bottom-icons-box">
           <uni-icons type="chat" size="22" color="#f07373"></uni-icons>
         </view>
-        <view class="detail-bottom-icons-box">
-          <uni-icons type="heart" size="22" color="#f07373"></uni-icons>
+        <view class="detail-bottom-icons-box" @click="likeTap(formData._id)">
+          <uni-icons :type="formData.is_like ? 'heart-filled' : 'heart'" size="22" color="#f07373"></uni-icons>
         </view>
         <view class="detail-bottom-icons-box">
           <uni-icons type="hand-up" size="22" color="#f07373"></uni-icons>
@@ -87,7 +87,7 @@
     onLoad(query) {
       // query 是通过navigateTo 传过来的
       this.formData = JSON.parse(query.params)
-      // this.getDetail()
+      this.getDetail()
       this.getComments()
     },
     
@@ -165,6 +165,42 @@
         }
         console.log(this.replyFormData);
         this.openComment()
+      },
+      // 关注
+      follow(author_id) {
+        this.setUpdateAuthor(author_id)
+      },
+      // 关注作者
+      setUpdateAuthor(author_id) {
+        uni.showLoading()
+        this.$api.update_author({
+          author_id
+        }).then(res => {
+          uni.hideLoading()
+          // debugger
+          this.formData.is_author_like = !this.formData.is_author_like
+          uni.showToast({
+            title:this.formData.is_author_like?'关注作者成功':'取消关注作者',
+            icon:"none"
+          })
+        })
+      },
+      // 收藏
+      likeTap(article_id) {
+        this.setUpdateLike(article_id)
+      },
+      // 收藏文章
+      setUpdateLike(article_id) {
+        uni.showLoading()
+        this.$api.update_like({
+          article_id
+        }).then(res => {
+          uni.hideLoading()
+          this.formData.is_like = !this.formData.is_like
+          uni.showToast({
+            title: this.formData.is_like ? '收藏成功' : '取消收藏'
+          })
+        })
       }
     }
   }
