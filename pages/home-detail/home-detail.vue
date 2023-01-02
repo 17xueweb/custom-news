@@ -21,8 +21,7 @@
     </view>
     <view class="detail-content">
       <view class="detail-html">
-        <!-- <u-parse :content="formData.content" :noData="noData"></u-parse> -->
-        内容
+        <u-parse :content="formData.content" :noData="noData"></u-parse>
         <view class="detail-comment">
           <view class="comment-title">
             最新评论

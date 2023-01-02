@@ -11,8 +11,8 @@
         <view class="title" v-else>
           {{comments.author.author_name}} <text class="reply-text">回复</text>{{comments.to}}
         </view>
-        <view class="">
-          {{comments.author.create_time}}
+        <view>
+          {{comments.create_time | formatTime}}
         </view>
       </view>
     </view>
@@ -37,6 +37,7 @@
 <script>
   // 递归组件 自己引用自己
   import commentsBox from '@/components/comments-box/comments-box.vue'
+  import { parseTime } from '@/utils/index.js'
   export default {
     components: {
       commentsBox
@@ -58,6 +59,11 @@
       return {
         
       };
+    },
+    filters: {
+      formatTime(time) {
+        return parseTime(time)
+      }
     },
     methods: {
       commentsReply(comment) {
