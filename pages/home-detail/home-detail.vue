@@ -45,8 +45,8 @@
         <view class="detail-bottom-icons-box" @click="likeTap(formData._id)">
           <uni-icons :type="formData.is_like ? 'heart-filled' : 'heart'" size="22" color="#f07373"></uni-icons>
         </view>
-        <view class="detail-bottom-icons-box">
-          <uni-icons type="hand-up" size="22" color="#f07373"></uni-icons>
+        <view class="detail-bottom-icons-box" @click="thumbsup(formData._id)">
+          <uni-icons :type=" formData.is_thumbs_up ? 'hand-up-filled' : 'hand-up'" size="22" color="#f07373"></uni-icons>
         </view>
       </view>
     </view>
@@ -197,9 +197,29 @@
         }).then(res => {
           uni.hideLoading()
           this.formData.is_like = !this.formData.is_like
+          uni.$emit('update_article')
           uni.showToast({
-            title: this.formData.is_like ? '收藏成功' : '取消收藏'
+            title: this.formData.is_like ? '收藏成功' : '取消收藏',
+            icon: 'none'
           })
+        })
+      },
+      // 点赞
+      thumbsup(article_id) {
+        this.setUpdateThumbs(article_id)
+      },
+      setUpdateThumbs(article_id) {
+        uni.showLoading()
+        this.$api.update_thumbsup({
+          article_id
+        }).then(res => {
+          uni.hideLoading()
+          this.formData.is_thumbs_up = true
+          this.formData.thumbs_up_count++
+          uni.showToast({
+            title: res.msg
+          })
+          
         })
       }
     }
