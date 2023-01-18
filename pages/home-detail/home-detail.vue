@@ -178,6 +178,7 @@
           uni.hideLoading()
           // debugger
           this.formData.is_author_like = !this.formData.is_author_like
+          uni.$emit('update_author')
           uni.showToast({
             title:this.formData.is_author_like?'关注作者成功':'取消关注作者',
             icon:"none"

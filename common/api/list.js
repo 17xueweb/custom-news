@@ -75,3 +75,10 @@ export const get_follow = (data) => {
     data
   })
 }
+
+export const get_author = (data) => {
+  return $http({
+    url: 'get_author',
+    data
+  })
+}

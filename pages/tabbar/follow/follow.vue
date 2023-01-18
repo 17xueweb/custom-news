@@ -12,7 +12,7 @@
     </view>
     </view>
     <view class="follow-list">
-      <swiper class="follow-list-swiper">
+      <swiper class="follow-list-swiper" :current="activeIndex" @change="change">
         <swiper-item>
           <list-scroll>
             <uni-load-more v-if="list.length === 0 && !articleShow" iconType="snow" status="loading"></uni-load-more>
@@ -21,7 +21,9 @@
           </list-scroll>
         </swiper-item>
         <swiper-item>
-          <view class="swiper-item">作者</view>
+          <list-scroll>
+            <list-author v-for="item in authorLists" :key="item.id" :item="item"></list-author>
+          </list-scroll>
         </swiper-item>
       </swiper>
     </view>
@@ -32,8 +34,9 @@
   export default {
     data() {
       return {
-        activeIndex: 0,
+        activeIndex: 1,
         list: [],
+        authorLists: [],
         articleShow: false
       }
     },
@@ -43,9 +46,16 @@
         console.log('关注页面触发');
         this.getFollow()
       })
+      uni.$on('update_author', () => {
+        this.getAuthor()
+      })
       this.getFollow()
+      this.getAuthor()
     },
     methods: {
+      change(e) {
+        this.activeIndex = e.detail.current
+      },
       tab(index) {
         this.activeIndex = index
       },
@@ -55,6 +65,13 @@
           this.list = data
           this.articleShow = this.list.length === 0 ? true : false
           console.log(res);
+        })
+      },
+      getAuthor() {
+        this.$api.get_author().then(res => {
+          console.log(res);
+          const { data } = res
+          this.authorLists = data
         })
       }
     }
