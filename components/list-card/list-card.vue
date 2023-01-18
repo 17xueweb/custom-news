@@ -9,7 +9,7 @@
       <view class="listcard-content">
         <view class="listcard-content-title">
           <text>{{item.title}}</text>
-          <likes :item="item"></likes>
+          <likes :types="types" :item="item"></likes>
         </view>
         <view class="listcard-content-des">
           <view class="listcard-content-des-label">
@@ -29,7 +29,7 @@
       <view class="listcard-content">
         <view class="listcard-content-title">
           <text>{{item.title}}</text>
-          <likes :item="item"></likes>
+          <likes :types="types" :item="item"></likes>
         </view>
         <view class="listcard-image">
           <!-- 只展示3张 -->
@@ -58,7 +58,7 @@
       <view class="listcard-content">
         <view class="listcard-content-title">
           <text>{{item.title}}</text>
-          <likes :item="item"></likes>
+          <likes :types="types" :item="item"></likes>
         </view>
         <view class="listcard-content-des">
           <view class="listcard-content-des-label">
@@ -83,6 +83,10 @@
         default() {
           return {}
         }
+      },
+      types: {
+        type: String,
+        default: ''
       }
     },
     name:"list-card",

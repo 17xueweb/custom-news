@@ -46,10 +46,12 @@
     created() {
       // TODO: tab还没有赋值，所以传0 报错， 监听tab变化
       // this.getList(0)
-      uni.$on('update_article', () => {
-        this.listCatchData = {}
-        this.load = {}
-        this.getList(this.activeIndex)
+      uni.$on('update_article', (e) => {
+        if(e === 'follow') {
+          this.listCatchData = {}
+          this.load = {}
+          this.getList(this.activeIndex)
+        }
       })
     },
     methods: {

@@ -29,6 +29,7 @@
 <style lang="scss">
   .scroll {
     flex: 1;
+    height: 100%;
     box-sizing: border-box;
     overflow: hidden;
 

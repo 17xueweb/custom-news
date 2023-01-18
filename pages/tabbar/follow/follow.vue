@@ -11,6 +11,20 @@
       </view>
     </view>
     </view>
+    <view class="follow-list">
+      <swiper class="follow-list-swiper">
+        <swiper-item>
+          <list-scroll>
+            <uni-load-more v-if="list.length === 0 && !articleShow" iconType="snow" status="loading"></uni-load-more>
+            <list-card v-for="item in list" :key="item._id" :item="item" types="follow"></list-card>
+            <view class="no-data" v-if="articleShow">没有数据</view>
+          </list-scroll>
+        </swiper-item>
+        <swiper-item>
+          <view class="swiper-item">作者</view>
+        </swiper-item>
+      </swiper>
+    </view>
   </view>
 </template>
 
@@ -18,12 +32,30 @@
   export default {
     data() {
       return {
-        activeIndex: 0
+        activeIndex: 0,
+        list: [],
+        articleShow: false
       }
+    },
+    onLoad() {
+      // 自定义事件,$on 只能在打开页面触发
+      uni.$on('update_article', () => {
+        console.log('关注页面触发');
+        this.getFollow()
+      })
+      this.getFollow()
     },
     methods: {
       tab(index) {
         this.activeIndex = index
+      },
+      getFollow() {
+        this.$api.get_follow().then(res => {
+          const { data } = res
+          this.list = data
+          this.articleShow = this.list.length === 0 ? true : false
+          console.log(res);
+        })
       }
     }
   }
@@ -66,5 +98,20 @@ page {
       }
     }
   }
+  .follow-list {
+    flex: 1;
+    .follow-list-swiper {
+      height: 100%;
+      .swiper-item {
+        height: 100%;
+      }
+    }
+  }
+}
+.no-data {
+  padding: 50px;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
 }
 </style>
