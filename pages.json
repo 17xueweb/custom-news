@@ -13,7 +13,7 @@
             "path" : "pages/tabbar/follow/follow",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "uni-app",
+                "navigationBarTitleText": "关注",
                 "enablePullDownRefresh": false
             }
             
@@ -22,7 +22,7 @@
             "path" : "pages/tabbar/my/my",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "个人中心",
                 "enablePullDownRefresh": false
             }
             
@@ -50,7 +50,7 @@
             "path" : "pages/home-detail/home-detail",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "详情",
                 "enablePullDownRefresh": false
             }
             
@@ -59,7 +59,16 @@
             "path" : "pages/detail-comments/detail-comments",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "评论列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my-article/my-article",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的文章",
                 "enablePullDownRefresh": false
             }
             

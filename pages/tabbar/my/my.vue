@@ -2,32 +2,32 @@
   <view>
     <view class="my-header">
       <view class="my-header-background">
-        <image src="../../../static/logo.png" ></image>
+        <image :src="userinfo.avatar" ></image>
       </view>
       <view class="my-header-logo">
         <view class="my-header-logo-box">
-          <image src="../../../static/logo.png" mode="aspectFill"></image>
+          <image :src="userinfo.avatar" mode="aspectFill"></image>
         </view>
-        <text class="my-header-name">meHaotian</text>
+        <text class="my-header-name">{{userinfo.author_name}}</text>
       </view>
       <view class="my-header-info">
         <view class="my-header-info-box">
           <text class="my-header-info-title">被关注</text>
-          <text>1234</text>
+          <text>{{userinfo.follow_count}}</text>
         </view>
         <view class="my-header-info-box">
           <text class="my-header-info-title">粉丝</text>
-          <text>1234</text>
+          <text>{{userinfo.fans_count}}</text>
         </view>
         <view class="my-header-info-box">
           <text class="my-header-info-title">积分</text>
-          <text>1234</text>
+          <text>{{userinfo.integral_count || 0}}</text>
         </view>
       </view>
     </view>
     
     <view class="my-content">
-      <view class="my-content-list">
+      <view class="my-content-list" @click="open">
         <view class="my-content-list-title">
           <uni-icons class="icons" type="contact" size="16" color="#666"></uni-icons>
           <text>我的文章</text>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
     data() {
       return {
@@ -53,7 +54,14 @@
       }
     },
     methods: {
-      
+      open() {
+        uni.navigateTo({
+          url:'/pages/my-article/my-article'
+        })
+      }
+    },
+    computed: {
+      ...mapState(['userinfo'])
     }
   }
 </script>
