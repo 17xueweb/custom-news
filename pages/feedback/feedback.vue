@@ -10,15 +10,15 @@
       反馈图片：
     </view>
     <view class="feedback-image-box">
-      <view class="feedback-image-item">
-        <view class="close-icon">
+      <view class="feedback-image-item" v-for="(item, index) in imageList" :key="index">
+        <view class="close-icon" @click="del(index)">
           <uni-icons type="closeempty" size="18" color="#fff"></uni-icons>
         </view>
         <view class="image-box">
-          <image src="../../static/logo.png" mode="aspectFill"></image>
+          <image :src="item.url" mode="aspectFill"></image>
         </view>
       </view>
-      <view class="feedback-image-item">
+      <view v-if="imageList.length < 5" class="feedback-image-item" @click="addImage">
         <view class="image-box">
           <uni-icons type="plusempty" size="50" color="#eee"></uni-icons>
         </view>
@@ -32,11 +32,31 @@
   export default {
     data() {
       return {
-        
+        imageList: []
       }
     },
     methods: {
-      
+      addImage() {
+        const count = 5 - this.imageList.length
+        uni.chooseImage({
+          count: count,
+          success: (res) => {
+            const tempfilepaths = res.tempFilePaths
+            tempfilepaths.forEach((item, index) => {
+              // 处理h5 多选的状况
+              if(index < count) {
+                this.imageList.push({
+                  url: item
+                })
+              }
+            })
+            console.log(res);
+          }
+        })
+      },
+      del(index) {
+        this.imageList.splice(index, 1)
+      }
     }
   }
 </script>
