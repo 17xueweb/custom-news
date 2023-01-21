@@ -26,6 +26,7 @@
 /* 文章场景相关 */
 .scroll {
   flex: 1;
+  height: 100%;
   box-sizing: border-box;
   overflow: hidden;
 }

@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   // uni-app 中 easyCom 引入组件 不需要写导入部分 局部引入
   // import navbar from '@/components/navbar/navbar.vue'
 	export default {
@@ -25,6 +26,14 @@
         activeIndex: 0
 			}
 		},
+    computed: {
+      ...mapState(['userinfo'])
+    },
+    watch: {
+      userinfo(newVal) {
+        this.getLabel();
+      }
+    },
     // 页面一进入就调取这个方法
 		onLoad() {
       uni.$on('labelChange', (res) => {
@@ -33,7 +42,6 @@
         this.activeIndex = 0
         this.getLabel();
       })
-      this.getLabel();
 		},
 		methods: {
       tab({data,  index}) {

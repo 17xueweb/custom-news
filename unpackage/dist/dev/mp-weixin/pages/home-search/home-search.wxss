@@ -33,7 +33,6 @@ page {
   display: flex;
   flex-direction: column;
   flex: 1;
-  border: 1px solid red;
 }
 .home .label-box {
   background-color: #fff;
@@ -68,5 +67,13 @@ page {
   border: 1px solid #666;
   font-size: 14px;
   color: #666;
+}
+.no-data {
+  height: 200px;
+  line-height: 200px;
+  width: 100%;
+  text-align: center;
+  color: #666;
+  font-size: 12px;
 }
 
