@@ -1,0 +1,1 @@
+.scroll{flex:1;height:100%;box-sizing:border-box;overflow:hidden}.scroll .list-scroll{height:100%;display:flex;flex-direction:column}
