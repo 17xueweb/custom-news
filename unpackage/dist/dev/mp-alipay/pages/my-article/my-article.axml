@@ -1,0 +1,1 @@
+<view><block a:if="{{lists.length===0}}"><uni-load-more vue-id="51140d76-1" status="loading" onVueInit="__l"></uni-load-more></block><list-card vue-id="{{'51140d76-2-'+__i0__}}" item="{{item}}" a:for="{{lists}}" a:for-item="item" a:for-index="__i0__" a:key="id" onVueInit="__l"></list-card></view>
